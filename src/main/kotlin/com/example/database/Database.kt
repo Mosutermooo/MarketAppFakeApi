@@ -22,6 +22,7 @@ object Database {
         transaction {
             SchemaUtils.create(ProductTable)
             SchemaUtils.create(ProductImages)
+            SchemaUtils.create(StoreTable)
         }
 
     }

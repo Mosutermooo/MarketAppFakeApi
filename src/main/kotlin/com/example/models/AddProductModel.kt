@@ -7,7 +7,11 @@ import kotlinx.serialization.Serializable
 data class AddProductModel (
     val barcode: String,
     val name: String,
-    val store: String,
+    val description: String,
+    val company: String,
+    val storeName: String,
     val price: String,
+    val storeLat: String,
+    val storeLng: String,
     val images: List<String>
         )

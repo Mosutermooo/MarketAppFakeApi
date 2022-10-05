@@ -1,6 +1,7 @@
 package com.example.routing
 
 import com.example.models.AddProductModel
+import com.example.models.GetProductsWithBarcodeParams
 import com.example.repositories.ProductRepository
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -15,6 +16,12 @@ fun Application.productRoutes(productRepository: ProductRepository) {
                 val result = productRepository.addProduct(params)
                 call.respond(result)
             }
+            get("/get") {
+                val params = call.receive<GetProductsWithBarcodeParams>()
+                val result = productRepository.getProductsWithBarcode(params)
+                call.respond(result)
+            }
+
         }
     }
 }

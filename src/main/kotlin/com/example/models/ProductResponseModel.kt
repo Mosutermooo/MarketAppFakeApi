@@ -5,5 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ProductResponseModel (
     val message: String,
-    val success: Boolean
+    val success: Boolean,
+    val products: List<Product?>? = null
         )
