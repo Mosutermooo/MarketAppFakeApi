@@ -10,18 +10,21 @@ import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.lang.StringBuilder
 
 class ProductServiceImpl : ProductService {
 
     override suspend fun addProduct(params: AddProductModel): ProductResponseModel {
-        val product = dbQuery{
-            ProductTable.select{
-                ProductTable.description.eq(params.description)
-            }.map {
-                rowToProduct(it)
-            }.singleOrNull()
+        val products = dbQuery{
+            ProductTable.selectAll().map { rowToProduct(it) }
+        }
+
+        for (product in products) {
+            if(product?.productStore?.storeName == params.storeName && product.name == params.name){
+                return ProductResponseModel("The Product Already exists", false)
+            }
         }
 
         val store = dbQuery {
