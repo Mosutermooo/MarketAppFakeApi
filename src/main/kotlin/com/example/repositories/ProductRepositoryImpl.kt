@@ -10,7 +10,7 @@ class ProductRepositoryImpl(private val service: ProductService): ProductReposit
         return service.addProduct(params)
     }
 
-    override suspend fun getProductsWithBarcode(params: GetProductsWithBarcodeParams): ProductResponseModel {
-        return service.getProductsWithBarcode(params)
+    override suspend fun getProductsWithBarcode(barcode: String?): ProductResponseModel {
+        return service.getProductsWithBarcode(barcode)
     }
 }

@@ -6,7 +6,7 @@ import com.example.models.ProductResponseModel
 
 interface ProductService {
     suspend fun addProduct(params: AddProductModel): ProductResponseModel
-    suspend fun getProductsWithBarcode(params: GetProductsWithBarcodeParams): ProductResponseModel
+    suspend fun getProductsWithBarcode(barcode: String?): ProductResponseModel
 
 
 }

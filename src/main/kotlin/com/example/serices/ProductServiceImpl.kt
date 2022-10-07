@@ -91,10 +91,13 @@ class ProductServiceImpl : ProductService {
 
     }
 
-    override suspend fun getProductsWithBarcode(params: GetProductsWithBarcodeParams): ProductResponseModel {
+    override suspend fun getProductsWithBarcode(barcode: String?): ProductResponseModel {
+
+        if(barcode == null) return ProductResponseModel("Please enter a valid barcode", false)
+
         val products = dbQuery {
             ProductTable.select {
-                ProductTable.barcode.eq(params.barcode)
+                ProductTable.barcode.eq(barcode)
             }.map {
                 rowToProduct(it)
             }

@@ -17,8 +17,8 @@ fun Application.productRoutes(productRepository: ProductRepository) {
                 call.respond(result)
             }
             get("/get") {
-                val params = call.receive<GetProductsWithBarcodeParams>()
-                val result = productRepository.getProductsWithBarcode(params)
+                val barcode = call.request.queryParameters["barcode"]
+                val result = productRepository.getProductsWithBarcode(barcode)
                 call.respond(result)
             }
 
